@@ -1,0 +1,52 @@
+---
+title: "Time Series (Covid 19)"
+author: "Manu Tom"
+date: "21/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Import Libraries
+
+```{r}
+# importing all the necessary libraries
+library(tsibble)
+library(tidyverse)
+library(plotly)
+```
+
+## Import dataset
+
+```{r}
+# CREATE THE DATAFRAME
+data <- read_csv('Covid_Age.csv')
+data <- data_frame(data)
+head(data)
+```
+
+## Check for Null Values
+
+```{r}
+#CHECK FOR NULL VALUES IN THE DF
+is.null(data) 
+```
+
+```{r}
+#Number of Cases each week
+fig <- plot_ly(data, x = ~Week, y = ~Cases, type = 'scatter', mode='lines+markers')
+fig
+```
+
+```{r}
+#Age v/s Number of cases
+fig_1 <- plot_ly(data, x = ~Age, y = ~Cases, type = 'bar')
+fig_1
+```
+
+## Conclusion
+- There was a peek in the number of cases by the mid of May 2021
+- People with age more than 75 were more affected than other age groups.
+
